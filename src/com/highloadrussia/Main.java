@@ -4,7 +4,7 @@ import static com.highloadrussia.SortingAlgorithms.comparePerformanceOfSortingAl
 
 public class Main {
 
-    private static final int ARRAY_LENGTH = 100_000;
+    private static final int ARRAY_LENGTH = 50_000;
 
     public static void main(String[] args) {
 
