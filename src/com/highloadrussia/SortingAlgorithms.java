@@ -1,39 +1,35 @@
 package com.highloadrussia;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import static com.highloadrussia.Utils.printArrayLimited;
 
 public class SortingAlgorithms {
 
-    private static final Random rd = new Random();
-
     public static void comparePerformanceOfSortingAlgorithms(int arrayLength) {
 
         long startTime;
-        int[] arrayToSort = new int[arrayLength];
+        int[] arrayToSort = BenchmarkDataFactory.getArrayOfRandomValues(arrayLength);
         int[] sortedArray;
-
-        // init unsorted array with random values
-        for (int i = 0; i < arrayToSort.length; i++) {
-            arrayToSort[i] = rd.nextInt(arrayLength);
-        }
+        int[] copyOfArrayToSort;
 
         printArrayLimited("Unsorted array: ", arrayToSort);
 
         System.out.println("\n\nBubble sorting: ");
         System.out.println("===============");
+        copyOfArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
         startTime = System.currentTimeMillis();
-        sortedArray = bubbleSort(arrayToSort);
+        sortedArray = bubbleSort(copyOfArrayToSort);
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - startTime) + "ms");
 
         printArrayLimited("Sorted array:   ", sortedArray);
 
         System.out.println("\n\nQuick sorting: ");
         System.out.println("==============");
+
+        copyOfArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
         startTime = System.currentTimeMillis();
-        sortedArray = quickSort(arrayToSort);
+        sortedArray = quickSort(copyOfArrayToSort);
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - startTime) + "ms");
 
         printArrayLimited("Sorted array:   ", sortedArray);
