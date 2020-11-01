@@ -35,6 +35,16 @@ public class SortingAlgorithms {
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - startTime) + "ms");
 
         printArrayLimited("Sorted array:   ", sortedArray);
+
+        System.out.println("\n\nMerge sorting: ");
+        System.out.println("==============");
+
+        copyOfArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
+        startTime = System.currentTimeMillis();
+        sortedArray = mergeSort(copyOfArrayToSort);
+        System.out.println("Time elapsed: " + (System.currentTimeMillis() - startTime) + "ms");
+
+        printArrayLimited("Sorted array:   ", sortedArray);
     }
 
     public static int[] bubbleSort(int[] arrayToSort) {
@@ -126,6 +136,62 @@ public class SortingAlgorithms {
         // fill right part
         if (rightArrayRealLength > 0) {
             System.arraycopy(arrayRight, 0, result, leftArrayRealLength + 1, rightArrayRealLength);
+        }
+
+        return result;
+    }
+
+    public static int[] mergeSort(int[] arrayToSort) {
+
+        int baseIndex;
+        int[] arrayLeft;
+        int[] arrayRight;
+
+        // check base conditions
+        if (arrayToSort.length <= 1) {
+            return arrayToSort;
+        } else if (arrayToSort.length == 2) {
+            arrayLeft = new int[]{arrayToSort[0]};
+            arrayRight = new int[]{arrayToSort[1]};
+        } else {
+            baseIndex = arrayToSort.length / 2;
+
+            arrayLeft = new int[baseIndex + 1];
+            arrayRight = new int[arrayToSort.length - (baseIndex + 1)];
+
+            // fill left array
+            System.arraycopy(arrayToSort, 0, arrayLeft, 0, arrayLeft.length);
+
+            // fill right array
+            System.arraycopy(arrayToSort, baseIndex + 1, arrayRight, 0, arrayRight.length);
+        }
+
+        arrayLeft = mergeSort(arrayLeft);
+        arrayRight = mergeSort(arrayRight);
+
+        return merge(arrayLeft, arrayRight);
+
+    }
+
+    private static int[] merge(int[] arrayLeft, int[] arrayRight) {
+
+        int leftIndex = 0;
+        int rightIndex = 0;
+        int resultIndex = 0;
+        int[] result = new int[arrayLeft.length + arrayRight.length];
+
+        while (leftIndex < arrayLeft.length && rightIndex < arrayRight.length) {
+            if (arrayLeft[leftIndex] <= arrayRight[rightIndex]) {
+                result[resultIndex++] = arrayLeft[leftIndex++];
+            } else {
+                result[resultIndex++] = arrayRight[rightIndex++];
+            }
+        }
+
+        if (leftIndex < arrayLeft.length) {
+            System.arraycopy(arrayLeft, leftIndex, result, resultIndex, arrayLeft.length - leftIndex);
+        } else if (rightIndex < arrayRight.length) {
+            System.arraycopy(arrayRight, rightIndex, result, resultIndex, arrayRight.length - rightIndex);
         }
 
         return result;
