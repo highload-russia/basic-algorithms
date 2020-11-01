@@ -9,7 +9,7 @@ public class BenchmarkDataFactory {
     public static int[] getArrayOfRandomValues(int arrayLength) {
 
         if (arrayLength < 1) {
-            throw new IllegalArgumentException("Benchmarking array lenght must be at least 1. Passed value: " + arrayLength);
+            throw new IllegalArgumentException("Benchmarking array length must be at least 1. Passed value: " + arrayLength);
         }
 
         int[] result = new int[arrayLength];
