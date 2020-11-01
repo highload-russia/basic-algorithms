@@ -115,11 +115,11 @@ public class SortingAlgorithms {
 
         // fill left part
         if (leftArrayRealLength > 0) {
-            System.arraycopy(arrayLeft, 0, result, 0, arrayLeft.length);
+            System.arraycopy(arrayLeft, 0, result, 0, leftArrayRealLength);
         }
 
         // fill base part
-        result[arrayLeft.length] = arrayToSort[baseIndex];
+        result[leftArrayRealLength] = baseValue;
 
         // fill right part
         if (rightArrayRealLength > 0) {
