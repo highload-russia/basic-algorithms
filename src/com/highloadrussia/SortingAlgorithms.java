@@ -13,6 +13,8 @@ public class SortingAlgorithms {
         int[] sortedArray;
         int[] copyOfArrayToSort;
 
+        System.out.println("Benchmarking array size: " + arrayLength);
+
         printArrayLimited("Unsorted array: ", arrayToSort);
 
         System.out.println("\n\nBubble sorting: ");
